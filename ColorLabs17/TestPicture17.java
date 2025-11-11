@@ -33,8 +33,18 @@ public class TestPicture17
      p1.explore();
      
      int red, blue, green;
+     int avg;
      Pixel[] Mpixels;
+     Pixel[] Mpixels2;
+     Pixel[] Mpixels3;
+     Pixel[] Mpixels4;
      Mpixels = p1.getPixels();
+    Mpixels2 = p2.getPixels();
+    Mpixels3 = p3.getPixels();
+    Mpixels4 = p4.getPixels();
+
+
+     //double one color
     for (Pixel spot : Mpixels){
         red = spot.getRed();
         red = (int)(red * 2);
@@ -42,17 +52,54 @@ public class TestPicture17
         }
      p1.explore();
      Color newColor;
-     for(Pixel spot1 : Mpixels){
+     //negate
+     for(Pixel spot1 : Mpixels4){
          red=spot1.getRed();
          green=spot1.getGreen();
          blue=spot1.getBlue();
          newColor = new Color(255-red, 255-green, 255-blue);
          spot1.setColor(newColor);
      }
-     p1.explore();
-     
-     
-     
+     p4.explore();
+     //grey scale
+     for (Pixel spot2 : Mpixels){
+         red=spot2.getRed();
+         green=spot2.getGreen();
+         blue=spot2.getBlue();
+         avg=(int)(red+green+blue)/3;
+         
+         spot2.setRed(avg);
+         spot2.setGreen(avg);
+         spot2.setBlue(avg);
+     }
+        p1.explore();
+    //lighten/darken
+    for (Pixel spot3 : Mpixels2){
+        red=spot3.getRed();
+        green=spot3.getGreen();
+        blue=spot3.getBlue();
+        red=(int)(red+70);
+        green=(int)(green+70);
+        blue=(int)(blue+70);
+        spot3.setRed(red);
+        spot3.setGreen(green);
+        spot3.setBlue(blue);
+    }
+        p2.explore();
+        
+        //change 3 colors
+    for (Pixel spot4 : Mpixels3){
+        red=spot4.getRed();
+        green=spot4.getGreen();
+        blue=spot4.getBlue();
+        red=(int)(red*2);
+        green=(int)(green*2);
+        blue=(int)(blue*2);
+        spot4.setRed(red);
+        spot4.setGreen(green);
+        spot4.setBlue(blue);
+        }
+        p3.explore();
      //opens a pictue using a path
      //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
      
@@ -193,8 +240,8 @@ final double  FACTOR = .5;
     ferris2.explore();
 
   /*
-    //write/save a picture as a file
-    ferris1.write("images/ferris11.jpg");
+    //write/save a picture as a file//this writes a copy of the pic!!!!RENAME PIC!!!!
+    ferris1.write("images/SFTry1.jpg");
 
     /**/
   }//main
