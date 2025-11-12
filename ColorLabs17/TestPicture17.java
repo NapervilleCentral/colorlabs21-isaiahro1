@@ -38,11 +38,12 @@ public class TestPicture17
      Pixel[] Mpixels2;
      Pixel[] Mpixels3;
      Pixel[] Mpixels4;
+     Pixel[] Mpixels5;
      Mpixels = p1.getPixels();
     Mpixels2 = p2.getPixels();
     Mpixels3 = p3.getPixels();
     Mpixels4 = p4.getPixels();
-
+    Mpixels5 = p5.getPixels();
 
      //double one color
     for (Pixel spot : Mpixels){
@@ -92,14 +93,28 @@ public class TestPicture17
         red=spot4.getRed();
         green=spot4.getGreen();
         blue=spot4.getBlue();
-        red=(int)(red*2);
-        green=(int)(green*2);
-        blue=(int)(blue*2);
+        red=(green);
+        green=(blue);
+        blue=(green);
         spot4.setRed(red);
         spot4.setGreen(green);
         spot4.setBlue(blue);
         }
         p3.explore();
+    for(Pixel spot5 : Mpixels5){
+        red=spot5.getRed();
+        green=spot5.getGreen();
+        blue=spot5.getBlue();
+        if (red >100 && green >100 && blue>85){
+            red=(255);
+            blue=(0);
+            green=(0);
+            spot5.setRed(red);
+            spot5.setGreen(green);
+            spot5.setBlue(blue);
+        }
+    }
+    p5.explore();
      //opens a pictue using a path
      //Picture apic = new Picture("C:\\Users\\khayes\\Favorites\\Documents\APCS- Java\chap03\Curriclum 2013\Picture Color labs\images\\beach.jpg");
      
