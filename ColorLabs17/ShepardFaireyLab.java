@@ -1,9 +1,9 @@
 
 /**
- * Write a description of class SheparFaireyLab here.
+ * Changes the colors of a jpg picture
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * Isaiah Ro
+ * 11/16/25
  */
 import java.awt.*;
 import java.util.*;
@@ -18,11 +18,13 @@ public class ShepardFaireyLab
     public static void main(String[] args)
     {
         String fileName = FileChooser.pickAFile();
-        Picture me = new Picture("images/beach.jpg");
+        Picture me = new Picture("images/IMG_6643.jpg");
         
-        me.explore();
+        //me.explore();
 
-        Pixel[] pixels = me.getPixels();
+        Picture m1 = new Picture(me);
+        Pixel[] pixels = m1.getPixels();
+        
         Color darkBlue = new Color(0, 0, 139);
         Color redColor = new Color(180, 0, 0);
         Color lightBlue = new Color(173, 216, 230);
@@ -53,28 +55,23 @@ public class ShepardFaireyLab
                 p.setColor(cream);
             }
         }
-        me.explore();    
-    /**
-          * method 1 change
-          * 
-          */
-         /*
-         String fileName = FileChooser.pickAFile();
-        Picture me = new Picture("images/beach.jpg");
-        me.explore();
-        
-        Pixel[] pixels = me.getPixels();
-        Color darkBlue = new Color(0, 0, 139);
-        Color redColor = new Color(180, 0, 0);
-        Color lightBlue = new Color(173, 216, 230);
-        Color cream = new Color(248, 240, 227);
+        //m1.explore();    
+        //m1.write("images/SFregular.jpg");
+
+    
+         
+         
+         Picture m2= new Picture(me);
+         pixels=m2.getPixels();
+                
+         darkBlue = new Color(0, 0, 139);
+         redColor = new Color(180, 0, 0);
+         lightBlue = new Color(173, 216, 230);
+         cream = new Color(248, 240, 227);
+         Color mBlue = new Color(153,0,0);
         
         int s = 255;
         int b = 0;
-        double interval = (b - s) / 4.0;
-        double g1 = s + interval;
-        double g2 = s + 2 * interval;
-        double g3 = s + 3 * interval;
         for (Pixel p : pixels) {
             int avg = (p.getRed() + p.getGreen() + p.getBlue()) / 3;
             p.setRed(avg);
@@ -83,76 +80,82 @@ public class ShepardFaireyLab
             if (avg < s) s = avg;
             if (avg > b) b = avg;
         }
+        double interval = (b - s) / 5.0;
+        double g11 = s + interval;
+        double g22 = s + 2 * interval;
+        double g33 = s + 3 * interval;
+        double g44 = s + 4 * interval;
+        
         for (Pixel p : pixels) {
             int brightness = p.getRed();
-            if (brightness < g1) {
+            if (brightness < g11) {
                 p.setColor(darkBlue);
-            } else if (brightness < g2) {
+            } else if (brightness < g22) {
                 p.setColor(redColor);
-            } else if (brightness < g3) {
-                p.setColor(lightBlue);
-            } else {
+            } else if (brightness < g33) {
+                p.setColor(mBlue);
+            } else if (brightness < g44) {
                 p.setColor(cream);
+            } else {
+                p.setColor(lightBlue);
             }
         }
         
-        me.explore();
-
-         /**
-          * method 2 change
-          * 
-        */
-       /*
-       String fileName = FileChooser.pickAFile();
-        Picture me = new Picture("images/beach.jpg");
-        me.explore();
+        //m2.explore();
+        //m2.write("images/SFinterval.jpg");
+        Picture m3 = new Picture(me);
+        pixels = m3.getPixels();
         
-        Pixel[] pixels = me.getPixels();
-        Color lightGreen = new Color(208,240,192);
-        Color green = new Color(178,236,93);
-        Color blue = new Color(96,130,182);
-        Color grey = new Color(74,100,108);
-        Color black = new Color(42,52,57);
-        
-        int g1 = 255 / 5;
-        int g2 = (255 * 2) / 5;
-        int g3 = (255 * 3) / 5;
-        int g4 = (255 * 4) / 5;
+        Color c1 = new Color(92, 75, 81);
+        Color c2 = new Color(243, 181, 98);
+        Color c3 = new Color(183, 177, 145);
+        Color c4 = new Color(252, 213, 167);
+        Color c5 = new Color(248, 197, 133);
+        int s1 = 255; 
+        int b2 = 0;   
         
         for (Pixel p : pixels) {
             int r = p.getRed();
             int g = p.getGreen();
-            int b = p.getBlue();
-            int avg = (r + g + b) / 3;
+            int bl = p.getBlue();
+            int avg = (r + g + bl) / 3;
             p.setRed(avg);
             p.setGreen(avg);
             p.setBlue(avg);
-        } 
         
+            if (avg < s) s = avg;
+            if (avg > b) b = avg;
+        }
+        
+        // Compute the 5 intervals
+        double interval1 = (b - s) / 5.0;
+        double g111 = s + interval;
+        double g222 = s + 2 * interval;
+        double g333 = s + 3 * interval;
+        double g444 = s + 4 * interval;
+        
+        // Recolor based on intervals
         for (Pixel p : pixels) {
             int brightness = p.getRed();
         
-            if (brightness < g1) {
-                p.setColor(lightGreen);
-            } else if (brightness < g2) {
-                p.setColor(green);
-            } else if (brightness < g3) {
-                p.setColor(blue);
-            } else if (brightness < g4) {
-                p.setColor(grey);
-            } else {
-                p.setColor(black);
-            }
+            if (brightness < g111) p.setColor(c1); //STAY
+            else if (brightness < g222) 
+                p.setColor(c3);
+            else if (brightness < g333) 
+                p.setColor(c4); //STAY
+            else if (brightness < g444) 
+                p.setColor(c2);
+            else 
+                p.setColor(c5);
         }
         
-        me.explore();
- 
+        m3.explore();
 
-         /**
-          * custom color palette
-          */
+        m3.write("images/SFmyFinal.jpg");
 
     
+    /**/
+        
 }//class
 }
 
