@@ -13,9 +13,11 @@ import java.util.List;
 public class FinalPoster
 {
     public static void main(String[] args) throws Exception{
-        Picture temple = new Picture("images//temple.jpg");
-        mirrorVertical(temple,100);
-        temple.explore();
+        Picture ninja = new Picture("images//noahlatakascodingninja.jpg");
+        //mirrorVertical(ninja,500);
+        mirrorHorizontal(ninja,500);
+
+        ninja.explore();
     }
     
     public static void mirrorVertical(Picture source, int height){
@@ -32,4 +34,31 @@ public class FinalPoster
             }
         }
     }
+    
+    public static void mirrorHorizontal(Picture source, int width){
+        int height = source.getHeight();
+        int mirrorPoint = height/2;
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        int w = width;
+        for (int y=0; y<w;y++){
+            for ( int x = 0; x<mirrorPoint; x++){
+                leftPixel=source.getPixel(x,y);
+                rightPixel=source.getPixel(width-1-x,y);
+                rightPixel.setColor(leftPixel.getColor());
+            }
+        }
+    }
+    
+    public static void greyScale(Picture source){
+        Color grey = new Color(100,250,200);
+        Pixel leftPixel = null;
+        Pixel rightPixel = null;
+        public (int n){
+            
+        }
+        
+        
+    }
+    
 }
