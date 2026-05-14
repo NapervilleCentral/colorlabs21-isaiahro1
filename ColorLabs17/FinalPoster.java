@@ -1,14 +1,12 @@
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-
 /**
  * Write a description of class PostarFinal here.
  *
  * @author (your name)
  * @version (a version number or a date)
  */
-
 
 public class FinalPoster
 {
@@ -29,8 +27,12 @@ public class FinalPoster
         drawGreyscale(collage, original, w, 0);
         drawColor(collage, original, w * 2,0);
         drawMirrorHorizontal(collage, original, 0,h);
-        collage.write("finalcollage.jpg");
+        drawMirrorVertical(collage, original, w, h);
+        drawRecursiveTile(collage, original, w * 2,  h, w, h, 3);
+
+        collage.write("images/finalcollage.jpg");
         collage.explore();
+        
     }
     public static void drawScaled(Picture canvas, Picture source,int destX, int destY, int targetW, int targetH)
     {
@@ -43,7 +45,6 @@ public class FinalPoster
             {
                 int srcX = Math.min((int)((double) x / targetW * srcW), srcW - 1);
                 int srcY = Math.min((int)((double) y / targetH * srcH), srcH - 1);
-
                 canvas.getPixel(destX + x, destY + y).setColor(source.getPixel(srcX, srcY).getColor());
             }
         }
@@ -93,11 +94,10 @@ public class FinalPoster
                 }
                 else
                 {
-                    r  =Math.min(255,(int)(g * 1.08));
+                    r =Math.min(255,(int)(g * 1.08));
                     gr =Math.min(255,(int)(g * 1.00));
-                    b  =(int)(g * 0.85);
+                    b =(int)(g * 0.85);
                 }
-
                 collage.getPixel(destX + x, destY + y).setColor(new Color(r, gr, b));
             }
         }
@@ -114,12 +114,32 @@ public class FinalPoster
             for (int y = 0; y < height; y++)
             {
                 collage.getPixel(destX + x, destY + y) .setColor(source.getPixel(x, y).getColor());
-                collage.getPixel(destX + x, destY + (height - 1 - y)).setColor(source.getPixel(x, y).getColor());            }
+                collage.getPixel(destX + x, destY + (height - 1 - y)).setColor(source.getPixel(x, y).getColor());}
         }
     }
+    public static void drawMirrorVertical(Picture collage, Picture source, int destX, int destY)
+    {
+        int width = source.getWidth();
+        int height = source.getHeight();
+        int mirrorPoint = width / 2;
     
+        for (int y = 0; y < height; y++)
+        {
+            for (int x = 0; x < mirrorPoint; x++)
+            {
+                collage.getPixel(destX + x, destY + y).setColor(source.getPixel(x, y).getColor());
     
-
-        
+                collage.getPixel(destX + (width - 1 - x), destY + y).setColor(source.getPixel(x, y).getColor());
+            }
+        }
+    }
+    public static void drawRecursiveTile(Picture collage, Picture source,int destX, int destY,int regionW, int regionH,int depth)
+    {
+        if (depth == 0 || regionW < 4 || regionH < 4)
+        {
+            return;
+        }
+        drawScaled(collage, source, destX, destY, regionW, regionH);
+        drawRecursiveTile(collage, source, destX, destY, regionW / 2, regionH / 2, depth - 1);
+    }            
  }
-
